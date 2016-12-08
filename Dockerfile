@@ -20,6 +20,7 @@ RUN \
       iputils-ping \
       telnet \
       links \
+      sshpass \
     && apt-get install -f \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
