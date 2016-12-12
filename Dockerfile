@@ -70,7 +70,7 @@ RUN mkdir /var/run/sshd \
 #Download Grafana *.deb file
 RUN cd /opt \
     && wget https://grafanarel.s3.amazonaws.com/builds/grafana_4.0.2-1481203731_amd64.deb \
-    && dpkg -i /opt/grafana_4.0.2-1481203731_amd64.deb
+    && dpkg -i /opt/grafana_4.0.2-1481203731_amd64.deb \
     && rm /opt/grafana_4.0.2-1481203731_amd64.deb
 
 # Daemon
