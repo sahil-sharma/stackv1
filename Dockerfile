@@ -13,6 +13,7 @@ RUN \
       wget \
       supervisor \
       libgconf2-4 \
+      libfontconfig \
       nano \
       python \
       openssh-server \
@@ -24,14 +25,6 @@ RUN \
     && apt-get install -f \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-# disable ipv6
-RUN \
-  echo 'net.ipv6.conf.default.disable_ipv6 = 1' > /etc/sysctl.d/20-ipv6-disable.conf; \
-  echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> /etc/sysctl.d/20-ipv6-disable.conf; \
-  echo 'net.ipv6.conf.lo.disable_ipv6 = 1' >> /etc/sysctl.d/20-ipv6-disable.conf; \
-  cat /etc/sysctl.d/20-ipv6-disable.conf; \
-  sysctl -p
 
 # Installing Java1.7
 RUN \
@@ -74,6 +67,11 @@ RUN mkdir /var/run/sshd \
     && echo '    StrictHostKeyChecking no' >> /etc/ssh/ssh_config \
     && echo 'SSHD: ALL' >> /etc/hosts.allow
 
+#Download Grafana *.deb file
+RUN cd /opt \
+    && wget https://grafanarel.s3.amazonaws.com/builds/grafana_4.0.2-1481203731_amd64.deb \
+    && dpkg -i /opt/grafana_4.0.2-1481203731_amd64.deb
+    && rm /opt/grafana_4.0.2-1481203731_amd64.deb
+
 # Daemon
 CMD ["/usr/bin/supervisord"]
-
