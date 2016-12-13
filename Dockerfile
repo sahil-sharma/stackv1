@@ -15,7 +15,6 @@ RUN \
       libgconf2-4 \
       libfontconfig \
       nano \
-      python \
       openssh-server \
       net-tools \
       iputils-ping \
